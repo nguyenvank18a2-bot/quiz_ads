@@ -6,6 +6,10 @@
 4. Sao chép `.env.example` thành `.env.local` và điền Project URL cùng Publishable key.
 5. Nếu dùng Google, bật provider Google trong **Authentication > Providers** và điền Client ID/Secret từ Google Cloud.
 
+## Database đã có sẵn (Production)
+
+Không chạy lại `schema.sql` hoặc `admin_migration.sql` trên database đang dùng. Để khoá `claim_reward()` (không cho client tự cộng icon), chạy `claim_reward_lockdown.sql` trong **SQL Editor**; kết quả kiểm tra ở cuối file không được còn dòng `PUBLIC`, `anon` hoặc `authenticated`.
+
 ## Dữ liệu mẫu (local/dev)
 
 Sau khi chạy `schema.sql`, chạy tiếp `seed.sql` trong **SQL Editor**. File seed có thể chạy lại nhiều lần và tạo 25 câu hỏi cùng hai tài khoản:
