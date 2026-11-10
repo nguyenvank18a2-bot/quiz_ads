@@ -260,6 +260,8 @@ update public.profiles set role='user' where id='10000000-0000-4000-8000-0000000
 revoke execute on function public.sync_category_name() from public, anon, authenticated;
 revoke execute on function public.sync_question_category() from public, anon, authenticated;
 revoke execute on function public.rls_auto_enable() from public, anon, authenticated;
+-- Client không được tự cộng icon; phần thưởng quảng cáo đi qua SSV của app Android.
+revoke execute on function public.claim_reward() from public, anon, authenticated;
 
 create index if not exists questions_category_id_idx on public.questions(category_id);
 create index if not exists app_settings_updated_by_idx on public.app_settings(updated_by);

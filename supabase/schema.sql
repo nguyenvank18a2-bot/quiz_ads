@@ -61,7 +61,8 @@ $$;
 drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created after insert on auth.users for each row execute procedure public.handle_new_user();
 
--- DEV / MVP rewarded-ad simulator: mỗi lần gọi sẽ cộng 10 icon.
+-- Legacy DEV simulator (cộng 10 icon mỗi lần gọi, không có quảng cáo/SSV). Không cấp EXECUTE cho client:
+-- Icon từ quảng cáo chỉ được cộng qua SSV của backend app Android.
 create or replace function public.claim_reward()
 returns integer language plpgsql security definer set search_path = '' as $$
 declare new_balance integer;
@@ -108,10 +109,9 @@ end;
 $$;
 
 revoke execute on function public.handle_new_user() from public, anon, authenticated;
-revoke execute on function public.claim_reward() from public, anon;
+revoke execute on function public.claim_reward() from public, anon, authenticated;
 revoke execute on function public.unlock_question(bigint) from public, anon;
 revoke execute on function public.submit_answer(bigint, integer) from public, anon;
-grant execute on function public.claim_reward() to authenticated;
 grant execute on function public.unlock_question(bigint) to authenticated;
 grant execute on function public.submit_answer(bigint, integer) to authenticated;
 
