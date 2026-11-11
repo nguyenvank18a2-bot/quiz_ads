@@ -9,7 +9,9 @@ export const metadata: Metadata = {
 const APP_VERSION = "1.0.0";
 
 export default function DownloadPage() {
-  const apkUrl = process.env.NEXT_PUBLIC_ANDROID_APK_URL;
+  const apkUrl =
+    process.env.NEXT_PUBLIC_ANDROID_APK_URL ||
+    "https://github.com/nguyenvank18a2-bot/quiz_ads/releases/download/v1.0.0/cau-do-vui-release-unity-mediation-code18.apk";
   return (
     <main className="flex min-h-screen items-center justify-center px-4 py-10">
       <section className="w-full max-w-xl rounded-3xl border border-[var(--border)] bg-white p-7 text-center shadow-sm sm:p-10">
